@@ -1,7 +1,7 @@
 import pandas as pd 
 import matplotlib.pyplot as plt 
 
-file = "/home/tiago-morandi/Documentos/Bolsa/Python/FV-GRAFICOS/PR Mensal Soma Filtrado.xlsx"
+file = "/home/tiago/Área de trabalho/Bolsa/Bolsa-Fv/PRs.xlsx"
 
 df = pd.read_excel(file)
 df['Tempo Atualizado'] = pd.to_datetime(df['Tempo Atualizado'])
