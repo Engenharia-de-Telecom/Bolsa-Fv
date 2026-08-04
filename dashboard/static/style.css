@@ -1,0 +1,37 @@
+body {
+
+    font-family: Arial;
+    text-align: center;
+
+}
+
+
+.card {
+
+    display: inline-block;
+
+    width: 200px;
+
+    margin: 10px;
+
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background-color: #eeeeee;
+
+}
+
+
+.online {
+
+    background-color: #90ee90;
+
+}
+
+
+.offline {
+
+    background-color: #ff7070;
+
+}

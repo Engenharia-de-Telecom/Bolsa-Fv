@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "estacao-meteorologica-504017",
+  "private_key_id": "8301edd380e907846b1f95ab0df8c33d5498ab70",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDLICPanAsYsjpv\nFv/xjeY1RM0jrVPHfWQEA9iWDSOdNfqHmIZQWVQqyDnJm0uW5LkX7V70hVGnOY+E\nF/QtPJNKq3Y0yUEth7D5vVCiIiY01Ei3dV3bDLtUq7BMPh1vBeSaoTNLHbp0fXOq\njaf4zuoNwGkHosm73/EhfBPZuYS/MGoqI9eT4FESgrJb+r8NkPnl2mGUGH37IHCn\ncgug0+tHEk/D4h1ycky7VWZRHHLQfQD58t395nORFZxTbxBysSL7Fxzy8SU3bX7T\nnspu4KkoocZiSRMPT52ttHE/6iaTnPh9SwHJW0dojx4VufD1AFdnRS0toJcLcuFW\nUVVNYgkZAgMBAAECggEAD2z8bBCnoxN97ovPmheNoQP9lDUIhMDYBJoKK7MJvlmo\nEf4aTSXLh4g3I0Fg5y+tgsyrBmTNg6aSaJStHXZZNTV6P539Dikc3oprAjUXs7Ff\naFdIbmc0HsT/GXsqHxFSgA+35n92dnxEeXJSjEmiarLvBv5s1ZC3LjTPCRzWoPI4\nn8EdpW/CRUl4AAC+c/LgUA2zGrDHBaw+Odz7ZcOSHUL0IUTvKj+IoA+9LywbXVPy\nbZ0BJpC6jMs/31Y1JQMkDVJCz5iDSymyc4mwjS5SydAmTB79BBmNA07Jkh7qFHwI\nm9DiSey3c6sj3CJbuNqvVDEvgDX3IN4ReNk8S5nTAQKBgQDv31zRciPpqQsNYHDW\nlrfC+c/HuLzlRzN0kvpFKxWytYFFRfdH0A2DhRKy34hCK0ExfmdgslCydD0R9NRR\nLUexipnND142ywf4Sl/ufh7BR0f661c25CGNJSIooEs4c3fnfEweaBZMgxp+K6m5\nZtr4AzT3uCsOrhIGu1YlWKaMeQKBgQDYyEvQCyJq9XCVN/1pRv7aSc9JVqhNojfH\nWhoy2ZVIoB6gNl2eYc4II8astcTSSdCT4+MzdFQ32llAhyHl1lh3Olyxx7rnPS2i\nP5TA8WGRDFreiJ/PxJYQSJg0hDtJggXW8I/h8xeKy89HvOQKVOBIqYcYOPIYPdZr\nqTFXuZL5oQKBgCVUVmaF487eLskjJAxRIkHmjI5hUow/22Md6HLRNKw+EOMN82Cq\noR/BmtpZbSQXBStFp6LlvSc4bbSYrF4BtPGNR0ghRyEx0YizUmCUIgckJ7CF5Wm2\ncP49NCasY2hil9tffZ0Rx76afIn8E4q11gfYv+p5L8I2FroTd2GSfUDJAoGAUWKA\n8836UeVrKtomTQvWSeVD6OibrumjvzfYdhaxsN5MISHH69oUG4Iy6EwlZD1KDPuV\nJJAbvgw/TbZtx3e9JqXGfwfY509UfoEYO4djda0JwFnShZHsNJjMa4rpJyOlRZhy\nrAUzZWw2mVwU0Lwkp6LdkP5wBSHSCgEvARwuTYECgYAo9SZhaZvYKS4eSzP/p1rF\nXyV6jUJ3aDF3mEjMpcNL/lDTslPCpG/K5OrRVGVacbnT8N/JwVbf12uCOKlqunkH\nC4IpkZKRWaXZjrv/WiCldj02bQOgh1S5kQ5c53VegEVc6yUw7cSjQXiCCpCi79+i\nLgAwQMeXjWq2kobyZkw+NQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "fotovoltaico@estacao-meteorologica-504017.iam.gserviceaccount.com",
+  "client_id": "115325511392071148052",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fotovoltaico%40estacao-meteorologica-504017.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
