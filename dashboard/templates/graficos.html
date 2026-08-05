@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Gráficos</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<h1>Gráficos da Estação</h1>
+
+<a href="/">← Dashboard</a>
+
+<hr>
+
+<label for="sensor">
+    Sensor:
+</label>
+
+<select id="sensor">
+
+    <option value="IRRADIANCE">Irradiância</option>
+
+    <option value="TA">Temperatura</option>
+
+    <option value="RH">Umidade</option>
+
+    <option value="PA">Pressão</option>
+
+    <option value="WD_SPD">Velocidade do vento</option>
+
+</select>
+
+<br><br>
+
+<button id="btnCarregar">
+    Carregar dados
+</button>
+
+<hr>
+
+<canvas id="grafico" width="900" height="400"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/graficos.js"></script>
+
+</body>
+
+</html>
