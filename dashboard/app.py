@@ -61,7 +61,7 @@ def api_dados():
         }), 400
     
     resposta = {
-        "tempo": df["DATE/TIME"].tolist(),
+        "tempo": df["DATE-TIME"].tolist(),
         "valores": df[coluna].tolist()
     }
 
