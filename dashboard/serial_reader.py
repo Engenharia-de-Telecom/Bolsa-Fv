@@ -18,23 +18,23 @@ PORTA = "/dev/ttyUSB0"
 
 BAUDRATE = 4800
 
-ARQUIVO_CSV = "dados_estacao.csv"
-ARQUIVO_CREDENCIAIS = "credenciais.json"
+ARQUIVO_CSV = "dados/dados_estacao.csv"
+ARQUIVO_CREDENCIAIS = "config/credenciais.json"
 
 SPREADSHEET_ID = "1nptoDAldIEQ8XesIDjvN_d0gLwEwucx3J5UhGhK4QBo"
 NOME_ABA = "Página1"
 
 COLUNAS = [
-    "DATE/TIME",
-    "IRRADIANCE",
-    "PA",
-    "RH",
-    "TA",
-    "RAIN_INT",
-    "RAIN_DUR",
-    "RAIN_AMOUNT",
-    "WD_DIR",
-    "WD_SPD"
+    "DATA-HORA",
+    "IRRADIÂNCIA [W/m²]",
+    "PRESSÃO ATM [hPa]",
+    "UMIDADE RELATIVA [%]",
+    "TEMPERATURA [°C]",
+    "INTENS. CHUVA [mm/h]",
+    "CHUVA - DURAÇÃO [s]",
+    "QUANTIDADE - CHUVA [mm]",
+    "DIREÇÃO DO VENTO [°]",
+    "VELOCIDADE DO VENTO [m/s]"
 ]
 
 # =====================================================
@@ -156,7 +156,7 @@ while True:
             }
 
         # Salva o status atual
-        with open("status.json", "w", encoding="utf-8") as arquivo_json:
+        with open("dados/status.json", "w", encoding="utf-8") as arquivo_json:
             json.dump(
                 estado,
                 arquivo_json,

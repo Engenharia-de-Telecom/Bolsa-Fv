@@ -1,24 +1,24 @@
 {
-    "ultima_atualizacao": "03/08/2026 13:09:29",
+    "ultima_atualizacao": "06/08/2026 18:12:05",
     "sensores": {
         "DATE/TIME": {
-            "valor": "2026-07-30 17:10:02",
+            "valor": "2026-08-06 15:12:02",
             "status": "online"
         },
         "IRRADIANCE": {
-            "valor": "1.30",
+            "valor": "1.06",
             "status": "online"
         },
         "PA": {
-            "valor": "1012.8",
+            "valor": "1002.5",
             "status": "online"
         },
         "RH": {
-            "valor": "57",
+            "valor": "58",
             "status": "online"
         },
         "TA": {
-            "valor": "22.8",
+            "valor": "22.3",
             "status": "online"
         },
         "RAIN_INT": {
@@ -34,12 +34,12 @@
             "status": "online"
         },
         "WD_DIR": {
-            "valor": "/////",
-            "status": "offline"
+            "valor": "165",
+            "status": "online"
         },
         "WD_SPD": {
-            "valor": "//////",
-            "status": "offline"
+            "valor": "25.8",
+            "status": "online"
         }
     }
 }

@@ -27,7 +27,7 @@ def index():
 @app.route("/status")
 def status():
 
-    arquivo = "status.json"
+    arquivo = "dados/status.json"
 
     if not os.path.exists(arquivo):
         return jsonify({
@@ -52,7 +52,7 @@ def graficos():
 @app.route("/api/dados")
 def api_dados():
     coluna = request.args.get("coluna")
-    df = pd.read_csv("dados_estacao.csv")
+    df = pd.read_csv("dados/dados_estacao.csv")
 
     print(df.columns)
     if coluna not in df.columns:
@@ -76,5 +76,4 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True
     )

@@ -1,0 +1,11 @@
+services:
+  dashboard:
+    build: .
+    container_name: estacao_dashboard
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    restart: always
