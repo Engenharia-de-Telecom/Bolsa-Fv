@@ -25,16 +25,16 @@ SPREADSHEET_ID = "1nptoDAldIEQ8XesIDjvN_d0gLwEwucx3J5UhGhK4QBo"
 NOME_ABA = "Página1"
 
 COLUNAS = [
-    "DATA-HORA",
-    "IRRADIÂNCIA [W/m²]",
-    "PRESSÃO ATM [hPa]",
-    "UMIDADE RELATIVA [%]",
-    "TEMPERATURA [°C]",
-    "INTENS. CHUVA [mm/h]",
-    "CHUVA - DURAÇÃO [s]",
-    "QUANTIDADE - CHUVA [mm]",
-    "DIREÇÃO DO VENTO [°]",
-    "VELOCIDADE DO VENTO [m/s]"
+    "DATE-TIME",
+    "IRRADIANCE",
+    "PA",
+    "RH",
+    "TA",
+    "RAIN_INT",
+    "RAIN_DUR",
+    "RAIN_AMOUNT",
+    "WD_DIR",
+    "WD_SPD"
 ]
 
 # =====================================================
