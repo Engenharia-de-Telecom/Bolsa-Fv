@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="/static/style.css">
 
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ifsc.ico') }}">
+
 </head>
 
 <body>
@@ -49,6 +51,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/static/graficos.js"></script>
+
+<label for="inicio">Data inicial:</label>
+<input type="date" id="inicio">
+
+<label for="fim">Data final:</label>
+<input type="date" id="fim">
+
 
 </body>
 

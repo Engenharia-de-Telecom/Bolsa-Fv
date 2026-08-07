@@ -7,8 +7,10 @@ botao.addEventListener("click", carregarDados);
 function carregarDados() {
 
     const sensor = document.getElementById("sensor").value;
+    const inicio = document.getElementById("inicio").value;
+    const fim    = document.getElementById("fim").value;
 
-    fetch(`/api/dados?coluna=${sensor}`)
+    fetch(`/api/dados?coluna=${sensor}&inicio=${inicio}&fim=${fim}`)
 
         .then(resposta => resposta.json())
 

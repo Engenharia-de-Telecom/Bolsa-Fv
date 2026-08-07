@@ -1,12 +1,12 @@
 {
     "ultima_atualizacao": "06/08/2026 18:12:05",
     "sensores": {
-        "DATE/TIME": {
+        "DATE-TIME": {
             "valor": "2026-08-06 15:12:02",
             "status": "online"
         },
         "IRRADIANCE": {
-            "valor": "1.06",
+            "valor": "1.07",
             "status": "online"
         },
         "PA": {
