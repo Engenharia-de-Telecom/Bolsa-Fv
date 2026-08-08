@@ -1,37 +1,425 @@
-body {
-
-    font-family: Arial;
-    text-align: center;
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+  color: #1f2933;
+  min-height: 100vh;
+}
+
+/* ==============================
+HEADER
+============================== */
+
+.header {
+  background-color: #ffffff;
+  min-height: 90px;
+  padding: 15px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1e5e8;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.header h1 {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ==============================
+STATUS DA ESTAÇÃO
+============================== */
+
+.status-estacao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background-color: #f0fdf4;
+  color: #166534;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-indicador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #22c55e;
+}
+
+/* ==============================
+NAVEGAÇÃO
+============================== */
+
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e5e8;
+}
+
+.nav-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  gap: 5px;
+}
+
+.nav-link {
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 15px;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  color: #1d4ed8;
+  background-color: #f8fafc;
+}
+
+.nav-link.active {
+  color: #1d4ed8;
+  border-bottom: 3px solid #1d4ed8;
+}
+
+/* ==============================
+CONTAINER
+============================== */
+
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 35px auto;
+}
+
+/* ==============================
+TÍTULO DO DASHBOARD
+============================== */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.dashboard-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.dashboard-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+#ultima-atualizacao {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* ==============================
+CARDS
+============================== */
+
+.sensores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
 
 .card {
-
-    display: inline-block;
-
-    width: 200px;
-
-    margin: 10px;
-
-    padding: 20px;
-
-    border-radius: 10px;
-
-    background-color: #eeeeee;
-
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-
-.online {
-
-    background-color: #90ee90;
-
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
+.card h3 {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
 
-.offline {
+.card .valor {
+  font-size: 30px;
+  font-weight: 600;
+  color: #111827;
+}
 
-    background-color: #ff7070;
+.card .unidade {
+  font-size: 14px;
+  color: #6b7280;
+  margin-left: 4px;
+}
 
+.card strong {
+  display: block;
+  margin-top: 15px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.card.online strong {
+  color: #16a34a;
+}
+
+.card.offline strong {
+  color: #dc2626;
+}
+
+/* ==============================
+STATUS DOS SENSORES
+============================== */
+
+.card.online {
+  border-left: 4px solid #22c55e;
+}
+
+.card.offline {
+  border-left: 4px solid #ef4444;
+  background-color: #fffafa;
+}
+
+.card.offline .valor {
+  color: #dc2626;
+}
+
+/* ==============================
+FOOTER
+============================== */
+
+footer {
+  text-align: center;
+  padding: 30px;
+  margin-top: 50px;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+/* ==============================
+CELULAR
+============================== */
+
+@media (max-width: 700px) {
+  .header {
+    padding: 15px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .status-estacao {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .nav-container {
+    width: 100%;
+  }
+
+  .nav-link {
+    flex: 1;
+    text-align: center;
+  }
+
+  .container {
+    width: 92%;
+    margin: 25px auto;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+/* ==============================
+PÁGINA DE GRÁFICOS
+============================== */
+
+.grafico-config {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.config-header {
+  margin-bottom: 25px;
+}
+
+.config-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.config-header p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 18px;
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group select,
+.form-group input {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1f2937;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group button {
+  height: 44px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1d4ed8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.form-group button:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+}
+
+.form-group button:active {
+  transform: translateY(0);
+}
+
+/* ==============================
+ÁREA DO GRÁFICO
+============================== */
+
+.grafico-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.grafico-header {
+  margin-bottom: 20px;
+}
+
+.grafico-header h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.grafico-header p {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.grafico-container {
+  position: relative;
+  width: 100%;
+  height: 480px;
+}
+
+/* ==============================
+RESPONSIVIDADE
+============================== */
+
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .botao-container {
+    grid-column: span 2;
+  }
+
+  .botao-container button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .botao-container {
+    grid-column: span 1;
+  }
+
+  .grafico-container {
+    height: 350px;
+  }
+}
 }

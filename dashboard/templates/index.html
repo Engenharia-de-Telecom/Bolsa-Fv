@@ -1,44 +1,110 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="pt-BR">
 
 <head>
 
-    <title>
-        Estação Meteorológica
-    </title>
 
-    <link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
 
-    <link rel="icon" 
-          type="image/x-icon" 
-          href="{{ url_for('static', filename='ifsc.ico') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Estação Meteorológica</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<link rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='ifsc.ico') }}">
+
 
 </head>
 
-
 <body>
 
-<h1>
-    Estação Meteorológica
-</h1>
+<header class="header">
+
+    <div class="header-left">
+
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='ifsc.ico') }}"
+                 alt="IFSC"
+                 class="logo">
+        </div>
+
+        <div>
+            <h1>Estação Meteorológica</h1>
+            <p>Monitoramento ambiental</p>
+        </div>
+
+    </div>
+
+    <div id="status-estacao" class="status-estacao">
+        <span class="status-indicador"></span>
+        <span>Verificando...</span>
+    </div>
+
+</header>
 
 
-<div id="sensores">
+<nav class="navbar">
 
-</div>
+    <div class="nav-container">
+
+        <a href="/" class="nav-link active">
+            Dashboard
+        </a>
+
+        <a href="/graficos" class="nav-link">
+            Gráficos
+        </a>
+
+    </div>
+
+</nav>
 
 
-<script src="/static/script.js"></script>
+<main class="container">
+
+    <section class="dashboard-header">
+
+        <div>
+            <h2>Monitoramento em tempo real</h2>
+            <p>Dados atuais dos sensores da estação</p>
+        </div>
+
+        <div id="ultima-atualizacao">
+            Última atualização: --
+        </div>
+
+    </section>
+
+
+    <section id="sensores" class="sensores">
+
+        <!--
+            Os cards dos sensores
+            serão inseridos pelo script.js
+        -->
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <p>
+        Estação Meteorológica · IFSC
+    </p>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
 
 </body>
-
-<nav>
-
-    <a href="/">Dashboard</a>
-    <a href="/graficos">Gráficos</a>
-
-
-</nav>    
 
 </html>
