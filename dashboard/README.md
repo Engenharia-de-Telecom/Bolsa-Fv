@@ -22,6 +22,7 @@ dashboard/
 │
 ├── static/
 │   ├── graficos.js
+│   ├── ifsc.ico
 │   ├── script.js
 │   └── style.css
 │
