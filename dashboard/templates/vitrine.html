@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vitrine - Estação Meteorológica</title>
+
+    <!-- Favicon -->
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="{{ url_for('static', filename='favicon.ico') }}"
+    >
+
+    <!-- CSS da vitrine -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='vitrine.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
+
+    <header class="cabecalho">
+
+        <h1>Estação Meteorológica</h1>
+
+        <p>Monitoramento dos dados meteorológicos</p>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
+    <main class="conteudo">
+
+
+        <!-- ======================================
+             CARDS
+        ======================================= -->
+
+        <section class="cards">
+
+
+            <!-- CARD DATA / HORA -->
+
+            <div class="card">
+
+                <h2>Data / Hora</h2>
+
+                <div
+                    id="dataHora"
+                    class="valor-data"
+                >
+                    --/--/---- --:--:--
+                </div>
+
+            </div>
+
+
+            <!-- CARD IRRADIÂNCIA -->
+
+            <div class="card">
+
+                <h2>Irradiância</h2>
+
+                <div class="valor">
+
+                    <span id="irradiancia">
+                        --
+                    </span>
+
+                    <span class="unidade">
+                        W/m²
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+             GRÁFICO
+        ======================================= -->
+
+        <section class="grafico-container">
+
+            <h2>Irradiância do dia</h2>
+
+            <div class="grafico">
+
+                <canvas
+                    id="graficoIrradiancia"
+                ></canvas>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ==========================================
+         CHART.JS
+    =========================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
+
+    <!-- ==========================================
+         JAVASCRIPT DA VITRINE
+    =========================================== -->
+
+    <script
+        src="{{ url_for('static', filename='vitrine.js') }}">
+    </script>
+
+
+</body>
+
+</html>

@@ -4,419 +4,517 @@ const botao = document.getElementById("btnCarregar");
 
 botao.addEventListener("click", carregarDados);
 
+
 function carregarDados() {
 
-const sensor =
-    document.getElementById("sensor").value;
+    const sensor =
+        document.getElementById("sensor").value;
 
-const inicio =
-    document.getElementById("inicio").value;
+    const inicio =
+        document.getElementById("inicio").value;
 
-const fim =
-    document.getElementById("fim").value;
+    const fim =
+        document.getElementById("fim").value;
 
-
-/*
- * Se nenhuma data foi informada,
- * carrega todo o histórico.
- */
-
-if (!inicio && !fim) {
-
-    carregarHistoricoCompleto(sensor);
-
-    return;
-
-}
+    const intervalo =
+        document.getElementById("intervalo").value;
 
 
-/*
- * Se apenas uma das datas foi preenchida,
- * solicita as duas.
- */
+    /*
+     * Se nenhuma data foi informada,
+     * carrega todo o histórico.
+     */
 
-if (!inicio || !fim) {
+    if (!inicio && !fim) {
 
-    alert(
-        "Informe a data inicial e a data final, ou deixe as duas em branco para carregar todo o histórico."
-    );
-
-    return;
-
-}
-
-
-/*
- * Verifica se o período é válido.
- */
-
-if (inicio > fim) {
-
-    alert(
-        "A data inicial não pode ser maior que a data final."
-    );
-
-    return;
-
-}
-
-
-/*
- * Carrega o período selecionado.
- */
-
-fetch(
-    `/api/dados?coluna=${sensor}&inicio=${inicio}&fim=${fim}`
-)
-
-    .then(resposta => resposta.json())
-
-    .then(dados => {
-
-        if (dados.erro) {
-
-            alert(dados.erro);
-
-            return;
-
-        }
-
-
-        desenharGrafico(
+        carregarHistoricoCompleto(
             sensor,
-            dados.tempo,
-            dados.valores
+            intervalo
         );
 
+        return;
+    }
 
-        atualizarInformacoes(
-            sensor,
-            inicio,
-            fim
-        );
 
-    })
+    /*
+     * Se apenas uma das datas foi preenchida,
+     * solicita as duas.
+     */
 
-    .catch(erro => {
-
-        console.error(erro);
+    if (!inicio || !fim) {
 
         alert(
-            "Não foi possível carregar os dados."
+            "Informe a data inicial e a data final, ou deixe as duas em branco para carregar todo o histórico."
         );
 
-    });
-
-}
-
+        return;
+    }
 
 
+    /*
+     * Verifica se o período é válido.
+     */
 
-function carregarHistoricoCompleto(sensor) {
-
-/*
- * Não envia inicio nem fim.
- * A API então retorna todo o histórico.
- */
-
-fetch(
-    `/api/dados?coluna=${sensor}`
-)
-
-    .then(resposta => resposta.json())
-
-    .then(dados => {
-
-        if (dados.erro) {
-
-            alert(dados.erro);
-
-            return;
-
-        }
-
-
-        desenharGrafico(
-            sensor,
-            dados.tempo,
-            dados.valores
-        );
-
-
-        atualizarInformacoesHistorico(
-            sensor,
-            dados.tempo
-        );
-
-    })
-
-    .catch(erro => {
-
-        console.error(erro);
+    if (inicio > fim) {
 
         alert(
-            "Não foi possível carregar os dados."
+            "A data inicial não pode ser maior que a data final."
         );
 
-    });
-
-}
-
+        return;
+    }
 
 
+    /*
+     * Carrega o período selecionado.
+     */
 
-function atualizarInformacoesHistorico(
-sensor,
-tempo
-) {
+    fetch(
+        `/api/dados?coluna=${sensor}` +
+        `&inicio=${inicio}` +
+        `&fim=${fim}` +
+        `&intervalo=${intervalo}`
+    )
 
-const titulo =
-    document.getElementById("titulo-grafico");
+        .then(resposta => resposta.json())
 
+        .then(dados => {
 
-const periodo =
-    document.getElementById("periodo-grafico");
+            if (dados.erro) {
 
+                alert(dados.erro);
 
-const nome =
-    obterNomeSensor(sensor);
-
-
-const unidade =
-    obterUnidade(sensor);
-
-
-titulo.textContent =
-    `${nome} (${unidade})`;
-
-
-/*
- * Mostra o período real dos dados.
- */
-
-if (tempo.length > 0) {
-
-    const primeiraData =
-        tempo[0].split(" ")[0];
-
-    const ultimaData =
-        tempo[tempo.length - 1].split(" ")[0];
-
-
-    periodo.textContent =
-        `Histórico completo · ${primeiraData} até ${ultimaData}`;
-
-}
-
-else {
-
-    periodo.textContent =
-        "Nenhum dado disponível.";
-
-}
-
-}
-
-function desenharGrafico(
-nome,
-tempo,
-valores
-) {
-
-
-const ctx =
-    document
-        .getElementById("grafico")
-        .getContext("2d");
-
-
-if (grafico !== null) {
-
-    grafico.destroy();
-
-}
-
-
-grafico = new Chart(ctx, {
-
-    type: "line",
-
-    data: {
-
-        labels: tempo,
-
-        datasets: [
-
-            {
-
-                label: obterNomeSensor(nome),
-
-                data: valores,
-
-                borderWidth: 2,
-
-                pointRadius: 0,
-
-                pointHoverRadius: 5,
-
-                tension: 0.25,
-
-                fill: true
-
+                return;
             }
 
-        ]
 
-    },
+            desenharGrafico(
+                sensor,
+                dados.tempo,
+                dados.valores
+            );
 
 
-    options: {
+            atualizarInformacoes(
+                sensor,
+                inicio,
+                fim,
+                intervalo
+            );
 
-        responsive: true,
+        })
 
-        maintainAspectRatio: false,
+        .catch(erro => {
 
-        interaction: {
+            console.error(erro);
 
-            mode: "index",
+            alert(
+                "Não foi possível carregar os dados."
+            );
 
-            intersect: false
+        });
+}
+
+
+/*
+ * ==========================================
+ * HISTÓRICO COMPLETO
+ * ==========================================
+ */
+
+function carregarHistoricoCompleto(
+    sensor,
+    intervalo
+) {
+
+    /*
+     * Agora também envia o intervalo
+     * para a API.
+     */
+
+    fetch(
+        `/api/dados?coluna=${sensor}` +
+        `&intervalo=${intervalo}`
+    )
+
+        .then(resposta => resposta.json())
+
+        .then(dados => {
+
+            if (dados.erro) {
+
+                alert(dados.erro);
+
+                return;
+            }
+
+
+            desenharGrafico(
+                sensor,
+                dados.tempo,
+                dados.valores
+            );
+
+
+            atualizarInformacoesHistorico(
+                sensor,
+                dados.tempo,
+                intervalo
+            );
+
+        })
+
+        .catch(erro => {
+
+            console.error(erro);
+
+            alert(
+                "Não foi possível carregar os dados."
+            );
+
+        });
+}
+
+
+/*
+ * ==========================================
+ * INFORMAÇÕES DO HISTÓRICO
+ * ==========================================
+ */
+
+function atualizarInformacoesHistorico(
+    sensor,
+    tempo,
+    intervalo
+) {
+
+    const titulo =
+        document.getElementById(
+            "titulo-grafico"
+        );
+
+
+    const periodo =
+        document.getElementById(
+            "periodo-grafico"
+        );
+
+
+    const nome =
+        obterNomeSensor(sensor);
+
+
+    const unidade =
+        obterUnidade(sensor);
+
+
+    titulo.textContent =
+        `${nome} (${unidade})`;
+
+
+    /*
+     * Mostra o período real dos dados.
+     */
+
+    if (tempo.length > 0) {
+
+        const primeiraData =
+            tempo[0];
+
+        const ultimaData =
+            tempo[tempo.length - 1];
+
+
+        periodo.textContent =
+            `Histórico completo · ` +
+            `${primeiraData} até ${ultimaData}` +
+            ` · ${obterNomeIntervalo(intervalo)}`;
+
+    }
+
+    else {
+
+        periodo.textContent =
+            "Nenhum dado disponível.";
+
+    }
+}
+
+
+/*
+ * ==========================================
+ * DESENHA O GRÁFICO
+ * ==========================================
+ */
+
+function desenharGrafico(
+    nome,
+    tempo,
+    valores
+) {
+
+    const ctx =
+        document
+            .getElementById("grafico")
+            .getContext("2d");
+
+
+    if (grafico !== null) {
+
+        grafico.destroy();
+
+    }
+
+
+    grafico = new Chart(ctx, {
+
+        type: "line",
+
+        data: {
+
+            labels: tempo,
+
+            datasets: [
+
+                {
+
+                    label: obterNomeSensor(nome),
+
+                    data: valores,
+
+                    borderWidth: 2,
+
+                    pointRadius: 0,
+
+                    pointHoverRadius: 5,
+
+                    tension: 0.25,
+
+                    fill: true
+
+                }
+
+            ]
 
         },
 
 
-        plugins: {
+        options: {
 
-            legend: {
+            responsive: true,
 
-                display: false
+            maintainAspectRatio: false,
 
-            },
-
-            tooltip: {
+            interaction: {
 
                 mode: "index",
 
                 intersect: false
 
-            }
-
-        },
+            },
 
 
-        scales: {
+            plugins: {
 
-            x: {
+                legend: {
 
-                ticks: {
+                    display: false
 
-                    maxTicksLimit: 10
+                },
+
+                tooltip: {
+
+                    mode: "index",
+
+                    intersect: false
 
                 }
 
             },
 
 
-            y: {
+            scales: {
 
-                beginAtZero: false
+                x: {
+
+                    ticks: {
+
+                        maxTicksLimit: 15
+
+                    }
+
+                },
+
+
+                y: {
+
+                    beginAtZero: false
+
+                }
 
             }
 
         }
 
-    }
-
-});
-
-
+    });
 }
+
+
+/*
+ * ==========================================
+ * NOME DOS SENSORES
+ * ==========================================
+ */
 
 function obterNomeSensor(sensor) {
 
+    const nomes = {
 
-const nomes = {
+        "IRRADIANCE":
+            "Irradiância",
 
-    "IRRADIANCE": "Irradiância",
+        "TA":
+            "Temperatura",
 
-    "TA": "Temperatura",
+        "RH":
+            "Umidade",
 
-    "RH": "Umidade",
+        "PA":
+            "Pressão",
 
-    "PA": "Pressão",
+        "WD_SPD":
+            "Velocidade do vento"
 
-    "WD_SPD": "Velocidade do vento"
-
-};
-
-
-return nomes[sensor] || sensor;
+    };
 
 
+    return nomes[sensor] || sensor;
 }
+
+
+/*
+ * ==========================================
+ * UNIDADES
+ * ==========================================
+ */
 
 function obterUnidade(sensor) {
 
+    const unidades = {
 
-const unidades = {
+        "IRRADIANCE":
+            "W/m²",
 
-    "IRRADIANCE": "W/m²",
+        "TA":
+            "°C",
 
-    "TA": "°C",
+        "RH":
+            "%",
 
-    "RH": "%",
+        "PA":
+            "hPa",
 
-    "PA": "hPa",
+        "WD_SPD":
+            "m/s"
 
-    "WD_SPD": "m/s"
-
-};
-
-
-return unidades[sensor] || "";
+    };
 
 
+    return unidades[sensor] || "";
 }
+
+
+/*
+ * ==========================================
+ * INFORMAÇÕES DO PERÍODO
+ * ==========================================
+ */
 
 function atualizarInformacoes(
-sensor,
-inicio,
-fim
+    sensor,
+    inicio,
+    fim,
+    intervalo
 ) {
 
-
-const titulo =
-    document.getElementById("titulo-grafico");
-
-
-const periodo =
-    document.getElementById("periodo-grafico");
+    const titulo =
+        document.getElementById(
+            "titulo-grafico"
+        );
 
 
-const nome =
-    obterNomeSensor(sensor);
+    const periodo =
+        document.getElementById(
+            "periodo-grafico"
+        );
 
 
-const unidade =
-    obterUnidade(sensor);
+    const nome =
+        obterNomeSensor(sensor);
 
 
-titulo.textContent =
-    `${nome} (${unidade})`;
+    const unidade =
+        obterUnidade(sensor);
 
 
-periodo.textContent =
-    `${formatarData(inicio)} até ${formatarData(fim)}`;
+    titulo.textContent =
+        `${nome} (${unidade})`;
 
 
+    periodo.textContent =
+        `${formatarData(inicio)}` +
+        ` até ` +
+        `${formatarData(fim)}` +
+        ` · ` +
+        `${obterNomeIntervalo(intervalo)}`;
 }
+
+
+/*
+ * ==========================================
+ * FORMATA DATA
+ * ==========================================
+ */
 
 function formatarData(data) {
 
+    const partes =
+        data.split("-");
 
-const partes = data.split("-");
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
 
-return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+/*
+ * ==========================================
+ * NOME DO INTERVALO
+ * ==========================================
+ */
+
+function obterNomeIntervalo(intervalo) {
+
+    const nomes = {
+
+        "minuto":
+            "Minuto a minuto",
+
+        "5min":
+            "A cada 5 minutos",
+
+        "15min":
+            "A cada 15 minutos",
+
+        "30min":
+            "A cada 30 minutos",
+
+        "hora":
+            "Hora a hora",
+
+        "dia":
+            "Dia a dia"
+
+    };
 
 
+    return nomes[intervalo] || intervalo;
 }
