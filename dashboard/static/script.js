@@ -1,3 +1,5 @@
+let graficoDia = null;
+
 function atualizarSensores() {
 
 
@@ -240,18 +242,252 @@ fetch("/status")
 }
 
 /*
+ * Primeira atualização
+ */
+atualizarSensores();
+atualizarGraficoDia();
 
-* Atualiza a cada 1 segundo
-  */
-
-setInterval(
-atualizarSensores,
-1000
-);
 
 /*
+ * Atualiza o gráfico a cada 1 minuto
+ */
+setInterval(
+    atualizarGraficoDia,
+    60000
+);
+// =====================================================
+// GRÁFICO DO DIA
+// =====================================================
 
-* Primeira atualização
-  */
+function atualizarGraficoDia() {
 
-atualizarSensores();
+    fetch("/api/grafico-dia")
+
+        .then(resposta => resposta.json())
+
+        .then(dados => {
+
+            if (dados.erro) {
+
+                console.error(dados.erro);
+
+                return;
+            }
+
+
+            // -----------------------------------------
+            // Atualiza o título do gráfico
+            // -----------------------------------------
+
+            const dataGrafico =
+                document.getElementById(
+                    "data-grafico-dia"
+                );
+
+
+            if (dataGrafico) {
+
+                dataGrafico.textContent =
+                    `Dados de ${dados.data}`;
+
+            }
+
+
+            // -----------------------------------------
+            // Cria o gráfico
+            // -----------------------------------------
+
+            const canvas =
+                document.getElementById(
+                    "grafico-dia"
+                );
+
+
+            if (!canvas) {
+                return;
+            }
+
+
+            const ctx =
+                canvas.getContext("2d");
+
+
+            // -----------------------------------------
+            // Destrói o gráfico anterior
+            // -----------------------------------------
+
+            if (graficoDia !== null) {
+
+                graficoDia.destroy();
+
+            }
+
+
+            // -----------------------------------------
+            // Cria novo gráfico
+            // -----------------------------------------
+
+            graficoDia = new Chart(ctx, {
+
+                type: "line",
+
+                data: {
+
+                    labels: dados.tempo,
+
+                    datasets: [
+
+                        {
+                            label: "Irradiância",
+
+                            data: dados.irradiancia,
+
+                            borderWidth: 2,
+
+                            pointRadius: 0,
+
+                            pointHoverRadius: 5,
+
+                            tension: 0.25,
+
+                            yAxisID: "yIrradiancia"
+                        },
+
+                        {
+                            label: "Temperatura",
+
+                            data: dados.temperatura,
+
+                            borderWidth: 2,
+
+                            pointRadius: 0,
+
+                            pointHoverRadius: 5,
+
+                            tension: 0.25,
+
+                            yAxisID: "yTemperatura"
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+
+                    interaction: {
+
+                        mode: "index",
+
+                        intersect: false
+
+                    },
+
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true,
+
+                            position: "top"
+
+                        },
+
+                        tooltip: {
+
+                            mode: "index",
+
+                            intersect: false
+
+                        }
+
+                    },
+
+
+                    scales: {
+
+                        x: {
+
+                            title: {
+
+                                display: true,
+
+                                text: "Hora"
+
+                            },
+
+                            ticks: {
+
+                                maxTicksLimit: 15
+
+                            }
+
+                        },
+
+
+                        yIrradiancia: {
+
+                            type: "linear",
+
+                            position: "left",
+
+                            title: {
+
+                                display: true,
+
+                                text: "Irradiância (W/m²)"
+
+                            },
+
+                            beginAtZero: true
+
+                        },
+
+
+                        yTemperatura: {
+
+                            type: "linear",
+
+                            position: "right",
+
+                            title: {
+
+                                display: true,
+
+                                text: "Temperatura (°C)"
+
+                            },
+
+                            grid: {
+
+                                drawOnChartArea: false
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        })
+
+        .catch(erro => {
+
+            console.error(
+                "Erro ao carregar gráfico do dia:",
+                erro
+            );
+
+        });
+
+}

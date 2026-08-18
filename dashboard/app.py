@@ -14,6 +14,74 @@ def index():
     return render_template("index.html")
 
 # =====================================================
+# API do gráfico na main
+# =====================================================
+
+@app.route("/api/grafico-dia")
+def api_grafico_dia():
+    # Ler o csv
+    df = pd.read_csv("dados/dados_estacao.csv")
+
+    # Converte data
+    df["DATE-TIME"] = pd.to_datetime(df["DATE-TIME"], errors="coerce")
+    df = df.dropna(subset=["DATE-TIME"])
+
+    # Converter os dados irradiancia e temperatura para numérico
+    df["IRRADIANCE"] = pd.to_numeric(df["IRRADIANCE"], errors="coerce")
+
+    df["TA"] = pd.to_numeric(df["TA"], errors="coerce")
+
+    # Remover linhas sem dados
+    df = df.dropna(subset=["IRRADIANCE", "TA"])
+    if df.empty:
+        return jsonify({
+            "erro": "Não existem dados de irradiância e temperatura."
+        }), 404
+
+    # Idenficar o ultimo dia da leitura
+    ultima_data = df["DATE-TIME"].max()
+    dia = ultima_data.normalize()
+    proximo_dia = dia + pd.Timedelta(days=1)
+
+    # Pegar somente os dados do dia
+    df_dia = df[(df["DATE-TIME"] >= dia) & (df["DATE-TIME"] < proximo_dia)].copy()
+
+    # Agrupar por hora
+    df_dia["HORA"] = df_dia["DATE-TIME"].dt.floor("h")
+    df_horario = df_dia.groupby("HORA")[["IRRADIANCE", "TA"]].mean().reset_index()
+
+    # retorna os dados em formato JSON
+    
+    return jsonify({
+
+        "data":
+            dia.strftime("%d/%m/%Y"),
+
+        "ultima_atualizacao":
+            ultima_data.strftime(
+                "%d/%m/%Y %H:%M:%S"
+            ),
+
+        "tempo":
+            df_horario["HORA"]
+            .dt.strftime("%H:%M")
+            .tolist(),
+
+        "irradiancia":
+            df_horario["IRRADIANCE"]
+            .round(2)
+            .tolist(),
+
+        "temperatura":
+            df_horario["TA"]
+            .round(2)
+            .tolist()
+
+    })
+
+
+
+# =====================================================
 # Página dedicada
 # =====================================================
 @app.route("/vitrine")

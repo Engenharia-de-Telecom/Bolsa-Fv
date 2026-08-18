@@ -89,6 +89,28 @@
 
     </section>
 
+<section class="grafico-dia">
+
+    <div class="grafico-dia-header">
+
+        <div>
+            <h2>Dados de hoje</h2>
+
+            <p id="data-grafico-dia">
+                Carregando dados...
+            </p>
+        </div>
+
+    </div>
+
+    <div class="grafico-dia-container">
+
+        <canvas id="grafico-dia"></canvas>
+
+    </div>
+
+</section>
+
 
 </main>
 
@@ -101,6 +123,8 @@
 
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 

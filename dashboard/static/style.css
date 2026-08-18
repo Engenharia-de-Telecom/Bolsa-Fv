@@ -269,6 +269,7 @@ CELULAR
     align-items: flex-start;
     gap: 10px;
   }
+}
 
 /* ==============================
 PÁGINA DE GRÁFICOS
@@ -421,5 +422,43 @@ RESPONSIVIDADE
   .grafico-container {
     height: 350px;
   }
+
+  .grafico-dia-container {
+    height: 300px;
+  }
+
 }
+
+/* ==============================
+GRÁFICO DO DIA
+============================== */
+
+.grafico-dia {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 25px;
+  margin-top: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.grafico-dia-header {
+  margin-bottom: 20px;
+}
+
+.grafico-dia-header h2 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.grafico-dia-header p {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.grafico-dia-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
 }
